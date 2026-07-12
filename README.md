@@ -102,6 +102,53 @@ While this is slower than strictly taking the top N or some simpler algorithms, 
 
 ---
 
+### Sample Recommendation Output
+
+```
+============================================================
+Top Recommendations for Jordan
+============================================================
+
+1. Midnight Coding
+   Artist: LoRoom
+   Genre:  lofi
+   Score:  99.7/100
+   Why:    matches genre lofi
+           matches mood chill
+           energy 0.4 fits your preference
+
+2. Library Rain
+   Artist: Paper Lanterns
+   Genre:  lofi
+   Score:  99.2/100
+   Why:    matches genre lofi
+           matches mood chill
+           energy 0.3 fits your preference
+
+3. Spacewalk Thoughts
+   Artist: Orbit Bloom
+   Genre:  ambient
+   Score:  63.2/100
+   Why:    matches mood chill
+           energy 0.3 fits your preference
+
+4. Deep House
+   Artist: House Vibes
+   Genre:  deep house
+   Score:  60.8/100
+   Why:    matches mood chill
+           energy 0.7 fits your preference
+
+5. Focus Flow
+   Artist: LoRoom
+   Genre:  lofi
+   Score:  50.0/100
+   Why:    matches genre lofi
+           energy 0.4 fits your preference
+
+============================================================
+```
+
 ## Getting Started
 
 ### Setup

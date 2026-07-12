@@ -1,2 +1,6 @@
-id,name,favorite_genre,favorite_mood,target_energy,likes_acoustic
-1,Alex,pop,happy,0.8,False
+id,name,favorite_genre,favorite_mood,target_energy,likes_acoustic,ranking_strategy
+1,Alex,pop,happy,0.8,False,diversity
+2,Jordan,lofi,chill,0.4,True,top_n
+3,Casey,rock,intense,0.92,False,top_n
+4,Morgan,jazz,relaxed,0.45,True,top_n
+5,River,pop,happy,0.28,False,diversity
