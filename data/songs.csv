@@ -9,3 +9,23 @@ id,title,artist,genre,mood,energy,tempo_bpm,valence,danceability,acousticness
 8,Night Drive Loop,Neon Echo,synthwave,moody,0.75,110,0.49,0.73,0.22
 9,Focus Flow,LoRoom,lofi,focused,0.40,80,0.59,0.60,0.78
 10,Rooftop Lights,Indigo Parade,indie pop,happy,0.76,124,0.81,0.82,0.35
+11,Digital Pulse,Synthwave Labs,electronic,energetic,0.88,128,0.72,0.85,0.08
+12,Street Wisdom,MC Fresh,hip-hop,aggressive,0.85,96,0.45,0.72,0.15
+13,Morning Dew,Folk Wanderer,folk,melancholic,0.32,88,0.41,0.48,0.94
+14,Moonlight Sonata,Classico Ensemble,classical,mellow,0.25,72,0.68,0.35,0.97
+15,Thunderstorm,Iron Anvil,metal,aggressive,0.95,160,0.35,0.62,0.05
+16,Neon Void,Shadow Artists,alternative,dark,0.68,102,0.38,0.64,0.28
+17,Blues at Midnight,Delta Soul,blues,nostalgic,0.45,85,0.52,0.59,0.88
+18,Island Vibes,Reggae Kings,reggae,smooth,0.62,92,0.75,0.68,0.72
+19,Sunset Drive,Country Legends,country,uplifting,0.58,104,0.79,0.72,0.82
+20,Soul Journey,Soul Singers,soul,smooth,0.52,94,0.71,0.64,0.76
+21,Synth-esis Complete,Electron Labs,electronic,energetic,0.87,124,0.74,0.82,0.12
+22,Cello There,String Quartet,classical,mellow,0.28,76,0.70,0.38,0.96
+23,A Minor Issue,Chord Progressions,classical,dark,0.35,84,0.42,0.45,0.89
+24,Major Success,Pop Stars Inc,pop,uplifting,0.80,118,0.85,0.81,0.22
+25,Riff Raff,Hard Rockers,rock,intense,0.89,148,0.46,0.70,0.14
+26,Bass-ic Training,Hip Hop Academy,hip-hop,focused,0.78,100,0.52,0.68,0.18
+27,Clef Hanger,Suspense Strings,classical,moody,0.40,88,0.58,0.42,0.91
+28,Soul Searching,Soul Explorers,soul,melancholic,0.48,92,0.51,0.59,0.78
+29,Funk Me Up,Funkadelics,funk,energetic,0.84,110,0.73,0.77,0.25
+30,Reggae-sponds Here,Island Vibes 2,reggae,smooth,0.65,98,0.76,0.70,0.68

@@ -17,17 +17,88 @@ Replace this paragraph with your own summary of what your version does.
 
 ## How The System Works
 
-Explain your design in plain language.
+### How Systems Usually Work
 
-Some prompts to answer:
+Systems such as Spotify and Youtube use a variety of factors for recommending songs to users but both leverage vector embeddings.
+These embeddings combine both direct media features (tempo, energy, acousticness, etc.) with some aspect of personalization (skipped, repeated, watched for X minutes).
+Overall, they rely more heavily on implicit signals (time spent and interactions) to predict satisfaction better than direct ratings metrics.
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-- What information does your `UserProfile` store
+Audio features include:
+* Tempo — BPM. Fast vs. slow.
+* Energy — intensity/activity. 0-1 scale. Rock = high, ballad = low.
+* Danceability — rhythmic regularity. How groove-friendly.
+* Acousticness — unplugged. 0-1, 1 = fully acoustic.
+* Valence — mood brightness. High = happy/upbeat, low = sad/angry.
+* Instrumentalness — no vocals. 0-1, 1 = pure instrumental.
+* Speechiness — spoken words ratio. Podcasts = high, songs = low.
+* Liveness — crowd/live performance detected.
+* Loudness — decibels. Normalized across catalog.
+* Key — musical key (C, D, E, etc.). 0-11 encoding.
+* Mode — major vs. minor. 0 or 1.
+
+Metadata features, on the other hand, include:
+* Genre — broad category (indie, hip-hop, metal, pop)
+* Subgenre — finer classification
+* Artist — creator. Enables artist-to-artist similarity.
+* Popularity — 0-100 score from streams. Bias risk.
+* Release date — recency
+* Duration — song length
+
+### How My System Works
+
+<!-- Explain your design in plain language.
+
+Some prompts to answer: -->
+
+<!-- - What features does each `Song` use in your system
+  - For example: genre, mood, energy, tempo -->
+<!-- - What information does your `UserProfile` store
 - How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend
+- How do you choose which songs to recommend -->
 
-You can include a simple diagram or bullet list if helpful.
+<!-- You can include a simple diagram or bullet list if helpful. -->
+
+#### Input Data
+
+My song recommender leverages 4 core features:
+
+1. **Genre** — broad buckets (pop vs lofi vs rock = different vibes)
+1. **Mood** — maps to user taste directly. User says "I want chill" = match mood=chill
+1. **Energy** — separates intensity within genre (pop happy 0.82 vs pop intense 0.93)
+1. **Danceability** — captures rhythm appeal independent of genre/mood
+
+We focused on these 4 because of their correlation to the valence, tempo, and accousticness metrics.
+
+Each **UserProfile** stores simple data about the user including favorite genre, mood, energy level, and acoustic preference.
+
+#### Scoring and Ranking
+
+There are separate scoring and ranking rules to separate concerns.
+The scoring rule is responsible for figuring out the best recommendations while the ranking rule is responsible for actually making the recommendation.
+This gives us maximum flexibility to adjust how we select songs and the scoring weights independently. 
+
+The recommender computes song scores with a simple greatest sum:
+
+```
+Score = (genre_match × 25) + (mood_match × 50) + (energy_distance × 25)
+
+where:
+  genre_match = 1 if song.genre == user.genre, else 0
+  mood_match = 1 if song.mood == user.mood, else 0
+  energy_distance = 1 - |song.energy - user.target_energy|
+```
+Once we have the scores, the recommendation follows a mood-dominant approach to match the intended user sentiment. This way we can offer users a variety of songs they'd enjoy without locking them into a single genre.
+
+The ranking algorithm follows as
+```
+1. Pick song with highest score → add to results
+2. For each remaining song:
+     relevance = score
+     diversity = distance from all picked songs (genre/mood/energy)
+     combined = (0.7 × relevance) + (0.3 × diversity)
+3. Pick highest combined, repeat until top N
+```
+While this is slower than strictly taking the top N or some simpler algorithms, it prioritizes offering our users a broader exposure to songs. As long as the algorithm is not unreasonably slow, I believe users will appreciate better recommendations over faster but worse playlists.
 
 ---
 
