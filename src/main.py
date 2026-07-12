@@ -13,10 +13,11 @@ import sys
 from .recommender import load_songs, load_user_profiles, recommend_songs, print_recommendations
 
 
-def main(user_name: str = "alex") -> None:
+def main(user_name: str = "Alex") -> None:
     songs = load_songs("data/songs.csv")
     profiles = load_user_profiles("data/user_profiles.csv")
 
+    user_name = user_name.capitalize()
     user_name_lower = user_name.lower()
     if user_name_lower in profiles:
         profile = profiles[user_name_lower]
