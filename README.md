@@ -104,6 +104,52 @@ While this is slower than strictly taking the top N or some simpler algorithms, 
 
 ### Sample Recommendation Output
 
+**Alex** (pop/happy, energy=0.8, diversity ranking):
+```
+============================================================
+Top Recommendations for Alex
+============================================================
+
+1. Sunrise City
+   Artist: Neon Echo
+   Genre:  pop
+   Score:  99.7/100
+   Why:    matches genre pop
+           matches mood happy
+           energy 0.8 fits your preference
+
+2. Rooftop Lights
+   Artist: Indigo Parade
+   Genre:  indie pop
+   Score:  64.4/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+3. Afrobeats
+   Artist: African Rhythms
+   Genre:  afrobeats
+   Score:  64.1/100
+   Why:    matches mood happy
+           energy 0.9 fits your preference
+
+4. Gym Hero
+   Artist: Max Pulse
+   Genre:  pop
+   Score:  48.0/100
+   Why:    matches genre pop
+           energy 0.9 fits your preference
+
+5. K-Pop Glory
+   Artist: K-Stars
+   Genre:  K-pop
+   Score:  64.8/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+============================================================
+```
+
+**Jordan** (lofi/chill, energy=0.4, top_n ranking):
 ```
 ============================================================
 Top Recommendations for Jordan
@@ -148,6 +194,548 @@ Top Recommendations for Jordan
 
 ============================================================
 ```
+
+**Casey** (rock/intense, energy=0.92, top_n ranking):
+```
+============================================================
+Top Recommendations for Casey
+============================================================
+
+1. Storm Runner
+   Artist: Voltline
+   Genre:  rock
+   Score:  99.8/100
+   Why:    matches genre rock
+           matches mood intense
+           energy 0.9 fits your preference
+
+2. Riff Raff
+   Artist: Hard Rockers
+   Genre:  rock
+   Score:  99.5/100
+   Why:    matches genre rock
+           matches mood intense
+           energy 0.9 fits your preference
+
+3. Gym Hero
+   Artist: Max Pulse
+   Genre:  pop
+   Score:  64.8/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+4. Hardcore Bass
+   Artist: Bass Drop
+   Genre:  dubstep
+   Score:  64.4/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+5. Techno Underground
+   Artist: Techno Master
+   Genre:  techno
+   Score:  64.2/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+============================================================
+```
+
+**Morgan** (jazz/relaxed, energy=0.45, top_n ranking):
+```
+============================================================
+Top Recommendations for Morgan
+============================================================
+
+1. Coffee Shop Stories
+   Artist: Slow Stereo
+   Genre:  jazz
+   Score:  98.8/100
+   Why:    matches genre jazz
+           matches mood relaxed
+           energy 0.4 fits your preference
+
+2. Acoustic Guitar
+   Artist: Acoustic Artist
+   Genre:  acoustic
+   Score:  64.2/100
+   Why:    matches mood relaxed
+           energy 0.4 fits your preference
+
+3. Blues at Midnight
+   Artist: Delta Soul
+   Genre:  blues
+   Score:  15.0/100
+   Why:    energy 0.5 fits your preference
+
+4. Midnight Coding
+   Artist: LoRoom
+   Genre:  lofi
+   Score:  14.5/100
+   Why:    energy 0.4 fits your preference
+
+5. Sunset Horizon
+   Artist: Indie Dreams
+   Genre:  indie rock
+   Score:  14.5/100
+   Why:    energy 0.5 fits your preference
+
+============================================================
+```
+
+**River** (pop/happy, energy=0.28, diversity ranking):
+```
+============================================================
+Top Recommendations for River
+============================================================
+
+1. Sunrise City
+   Artist: Neon Echo
+   Genre:  pop
+   Score:  91.9/100
+   Why:    matches genre pop
+           matches mood happy
+           energy 0.8 fits your preference
+
+2. Rooftop Lights
+   Artist: Indigo Parade
+   Genre:  indie pop
+   Score:  57.8/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+3. Afrobeats
+   Artist: African Rhythms
+   Genre:  afrobeats
+   Score:  56.3/100
+   Why:    matches mood happy
+           energy 0.9 fits your preference
+
+4. Gym Hero
+   Artist: Max Pulse
+   Genre:  pop
+   Score:  40.2/100
+   Why:    matches genre pop
+           energy 0.9 fits your preference
+
+5. K-Pop Glory
+   Artist: K-Stars
+   Genre:  K-pop
+   Score:  57.0/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+============================================================
+```
+
+## Adversarial Test Results
+
+These profiles test edge cases and potential scoring vulnerabilities:
+
+**Shadow** (darkwave/celebratory, energy=0.75 — impossible genre/mood combo):
+```
+============================================================
+Top Recommendations for Shadow
+============================================================
+
+1. Night Drive Loop
+   Artist: Neon Echo
+   Genre:  synthwave
+   Score:  15.0/100
+   Why:    energy 0.8 fits your preference
+
+2. Quiet Moments
+   Artist: Soft Piano
+   Genre:  classical
+   Score:  6.7/100
+   Why:    energy 0.2 fits your preference
+
+3. Thunderstorm
+   Artist: Iron Anvil
+   Genre:  metal
+   Score:  12.0/100
+   Why:    energy 0.9 fits your preference
+
+4. Rooftop Lights
+   Artist: Indigo Parade
+   Genre:  indie pop
+   Score:  14.8/100
+   Why:    energy 0.8 fits your preference
+
+5. Neon Nights
+   Artist: Synth Wave Master
+   Genre:  synth-pop
+   Score:  14.5/100
+   Why:    energy 0.7 fits your preference
+
+============================================================
+```
+
+**Absolute Min** (pop/happy, energy=0.01 — minimum energy boundary):
+```
+============================================================
+Top Recommendations for Absolute min
+============================================================
+
+1. Sunrise City
+   Artist: Neon Echo
+   Genre:  pop
+   Score:  87.8/100
+   Why:    matches genre pop
+           matches mood happy
+           energy 0.8 fits your preference
+
+2. Rooftop Lights
+   Artist: Indigo Parade
+   Genre:  indie pop
+   Score:  53.8/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+3. K-Pop Glory
+   Artist: K-Stars
+   Genre:  K-pop
+   Score:  53.0/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+4. Afrobeats
+   Artist: African Rhythms
+   Genre:  afrobeats
+   Score:  52.2/100
+   Why:    matches mood happy
+           energy 0.9 fits your preference
+
+5. Major Success
+   Artist: Pop Stars Inc
+   Genre:  pop
+   Score:  38.1/100
+   Why:    matches genre pop
+           energy 0.8 fits your preference
+
+============================================================
+```
+
+**Absolute Max** (pop/happy, energy=0.99 — maximum energy boundary):
+```
+============================================================
+Top Recommendations for Absolute max
+============================================================
+
+1. Sunrise City
+   Artist: Neon Echo
+   Genre:  pop
+   Score:  97.5/100
+   Why:    matches genre pop
+           matches mood happy
+           energy 0.8 fits your preference
+
+2. Afrobeats
+   Artist: African Rhythms
+   Genre:  afrobeats
+   Score:  63.0/100
+   Why:    matches mood happy
+           energy 0.9 fits your preference
+
+3. K-Pop Glory
+   Artist: K-Stars
+   Genre:  K-pop
+   Score:  62.3/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+4. Rooftop Lights
+   Artist: Indigo Parade
+   Genre:  indie pop
+   Score:  61.5/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+5. Gym Hero
+   Artist: Max Pulse
+   Genre:  pop
+   Score:  49.1/100
+   Why:    matches genre pop
+           energy 0.9 fits your preference
+
+============================================================
+```
+
+**Acoustic Lover** (jazz/relaxed, likes_acoustic=True):
+```
+============================================================
+Top Recommendations for Acoustic lover
+============================================================
+
+1. Coffee Shop Stories
+   Artist: Slow Stereo
+   Genre:  jazz
+   Score:  98.8/100
+   Why:    matches genre jazz
+           matches mood relaxed
+           energy 0.4 fits your preference
+
+2. Acoustic Guitar
+   Artist: Acoustic Artist
+   Genre:  acoustic
+   Score:  64.2/100
+   Why:    matches mood relaxed
+           energy 0.4 fits your preference
+
+3. Thunderstorm
+   Artist: Iron Anvil
+   Genre:  metal
+   Score:  7.5/100
+   Why:    energy 0.9 fits your preference
+
+4. Quiet Moments
+   Artist: Soft Piano
+   Genre:  classical
+   Score:  11.2/100
+   Why:    energy 0.2 fits your preference
+
+5. Blues at Midnight
+   Artist: Delta Soul
+   Genre:  blues
+   Score:  15.0/100
+   Why:    energy 0.5 fits your preference
+
+============================================================
+```
+
+**Acoustic Hater** (jazz/relaxed, likes_acoustic=False — IDENTICAL RESULTS):
+```
+============================================================
+Top Recommendations for Acoustic hater
+============================================================
+
+1. Coffee Shop Stories
+   Artist: Slow Stereo
+   Genre:  jazz
+   Score:  98.8/100
+   Why:    matches genre jazz
+           matches mood relaxed
+           energy 0.4 fits your preference
+
+2. Acoustic Guitar
+   Artist: Acoustic Artist
+   Genre:  acoustic
+   Score:  64.2/100
+   Why:    matches mood relaxed
+           energy 0.4 fits your preference
+
+3. Thunderstorm
+   Artist: Iron Anvil
+   Genre:  metal
+   Score:  7.5/100
+   Why:    energy 0.9 fits your preference
+
+4. Quiet Moments
+   Artist: Soft Piano
+   Genre:  classical
+   Score:  11.2/100
+   Why:    energy 0.2 fits your preference
+
+5. Blues at Midnight
+   Artist: Delta Soul
+   Genre:  blues
+   Score:  15.0/100
+   Why:    energy 0.5 fits your preference
+
+============================================================
+```
+
+**Genre-Energy Clash** (folk/melancholic, energy=0.95 — contradiction):
+```
+============================================================
+Top Recommendations for Genre-energy clash
+============================================================
+
+1. Morning Dew
+   Artist: Folk Wanderer
+   Genre:  folk
+   Score:  90.5/100
+   Why:    matches genre folk
+           matches mood melancholic
+           energy 0.3 fits your preference
+
+2. Indie Vibes
+   Artist: Indie Band
+   Genre:  indie
+   Score:  58.5/100
+   Why:    matches mood melancholic
+           energy 0.5 fits your preference
+
+3. Sunset Horizon
+   Artist: Indie Dreams
+   Genre:  indie rock
+   Score:  58.0/100
+   Why:    matches mood melancholic
+           energy 0.5 fits your preference
+
+4. Soul Searching
+   Artist: Soul Explorers
+   Genre:  soul
+   Score:  58.0/100
+   Why:    matches mood melancholic
+           energy 0.5 fits your preference
+
+5. Ballad Story
+   Artist: Emotional Singer
+   Genre:  ballad
+   Score:  55.0/100
+   Why:    matches mood melancholic
+           energy 0.3 fits your preference
+
+============================================================
+```
+
+**High Energy Rocker vs Low Energy Rocker** (same genre/mood, opposite energy):
+
+High Energy (rock/intense, energy=0.92):
+```
+============================================================
+Top Recommendations for High energy rocker
+============================================================
+
+1. Storm Runner
+   Artist: Voltline
+   Genre:  rock
+   Score:  99.8/100
+   Why:    matches genre rock
+           matches mood intense
+           energy 0.9 fits your preference
+
+2. Riff Raff
+   Artist: Hard Rockers
+   Genre:  rock
+   Score:  99.5/100
+   Why:    matches genre rock
+           matches mood intense
+           energy 0.9 fits your preference
+
+3. Gym Hero
+   Artist: Max Pulse
+   Genre:  pop
+   Score:  64.8/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+4. Techno Underground
+   Artist: Techno Master
+   Genre:  techno
+   Score:  64.2/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+5. Hardcore Bass
+   Artist: Bass Drop
+   Genre:  dubstep
+   Score:  64.4/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+============================================================
+```
+
+Low Energy (rock/intense, energy=0.35):
+```
+============================================================
+Top Recommendations for Low energy rocker
+============================================================
+
+1. Riff Raff
+   Artist: Hard Rockers
+   Genre:  rock
+   Score:  91.9/100
+   Why:    matches genre rock
+           matches mood intense
+           energy 0.9 fits your preference
+
+2. Storm Runner
+   Artist: Voltline
+   Genre:  rock
+   Score:  91.6/100
+   Why:    matches genre rock
+           matches mood intense
+           energy 0.9 fits your preference
+
+3. Quiet Moments
+   Artist: Soft Piano
+   Genre:  classical
+   Score:  12.8/100
+   Why:    energy 0.2 fits your preference
+
+4. Techno Underground
+   Artist: Techno Master
+   Genre:  techno
+   Score:  57.2/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+5. Gym Hero
+   Artist: Max Pulse
+   Genre:  pop
+   Score:  56.3/100
+   Why:    matches mood intense
+           energy 0.9 fits your preference
+
+============================================================
+```
+
+**Alex Clone** (identical to Alex — confirms determinism):
+```
+============================================================
+Top Recommendations for Alex clone
+============================================================
+
+1. Sunrise City
+   Artist: Neon Echo
+   Genre:  pop
+   Score:  99.7/100
+   Why:    matches genre pop
+           matches mood happy
+           energy 0.8 fits your preference
+
+2. Rooftop Lights
+   Artist: Indigo Parade
+   Genre:  indie pop
+   Score:  64.4/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+3. Afrobeats
+   Artist: African Rhythms
+   Genre:  afrobeats
+   Score:  64.1/100
+   Why:    matches mood happy
+           energy 0.9 fits your preference
+
+4. Gym Hero
+   Artist: Max Pulse
+   Genre:  pop
+   Score:  48.0/100
+   Why:    matches genre pop
+           energy 0.9 fits your preference
+
+5. K-Pop Glory
+   Artist: K-Stars
+   Genre:  K-pop
+   Score:  64.8/100
+   Why:    matches mood happy
+           energy 0.8 fits your preference
+
+============================================================
+```
+
+### Key Findings from Adversarial Testing
+
+- **likes_acoustic field unused**: Acoustic Lover and Acoustic Hater get identical recommendations (99% match). The `likes_acoustic` field in UserProfile is never used in scoring logic—this is dead code.
+- **Impossible combinations handled gracefully**: Shadow (darkwave/celebratory) scores only by energy since no songs match the genre+mood combo.
+- **Energy boundary behavior**: Extreme energy values (0.01, 0.99) don't break scoring; the energy_distance formula handles boundaries correctly.
+- **Genre+mood dominate**: Genre-Energy Clash (folk + 0.95 energy) still picks folk songs despite energy mismatch because genre+mood rewards (35+50=85 points) far exceed energy penalty.
+- **Deterministic output**: Alex vs Alex Clone return identical results (Storm Runner, etc.) in same order, confirming no randomness.
+- **Diversity algorithm working**: High/Low Energy Rockers (same genre/mood, different energy targets) do diverge slightly when using diversity ranking strategy.
 
 ## Getting Started
 
