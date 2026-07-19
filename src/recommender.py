@@ -3,6 +3,14 @@ from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 from enum import Enum
 
+# =============================================================================
+# EXPLANATION MESSAGE PATTERNS
+# =============================================================================
+
+EXPLAIN_MATCHES_GENRE = "matches your favorite genre"
+EXPLAIN_MATCHES_MOOD = "matches your favorite mood"
+
+
 class RankingStrategy(Enum):
     """Ranking strategy for song recommendations."""
     DIVERSITY = "diversity"
@@ -153,9 +161,9 @@ class Recommender:
 
         reasons = []
         if song.genre == user.favorite_genre:
-            reasons.append(f"matches your favorite genre ({user.favorite_genre})")
+            reasons.append(f"{EXPLAIN_MATCHES_GENRE} ({user.favorite_genre})")
         if song.mood == user.favorite_mood:
-            reasons.append(f"matches your favorite mood ({user.favorite_mood})")
+            reasons.append(f"{EXPLAIN_MATCHES_MOOD} ({user.favorite_mood})")
         reasons.append(f"energy level {song.energy:.1f} fits your preference")
 
         return f"Score: {score:.1f}/100. {', '.join(reasons)}."

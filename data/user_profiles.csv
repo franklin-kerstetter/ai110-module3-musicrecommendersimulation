@@ -4,3 +4,16 @@ id,name,favorite_genre,favorite_mood,target_energy,likes_acoustic,ranking_strate
 3,Casey,rock,intense,0.92,False,top_n
 4,Morgan,jazz,relaxed,0.45,True,top_n
 5,River,pop,happy,0.28,False,diversity
+6,Shadow,darkwave,celebratory,0.75,False,diversity
+7,Absolute Min,pop,happy,0.01,False,top_n
+8,Absolute Max,pop,happy,0.99,False,top_n
+9,Generalist,pop,happy,0.5,False,top_n
+10,Acoustic Lover,jazz,relaxed,0.45,True,diversity
+11,Acoustic Hater,jazz,relaxed,0.45,False,diversity
+12,Genre-Energy Clash,folk,melancholic,0.95,False,top_n
+13,Niche Fan,blues,nostalgic,0.5,True,top_n
+14,Silence Seeker,electronic,energetic,0.05,False,diversity
+15,High Energy Rocker,rock,intense,0.92,False,diversity
+16,Low Energy Rocker,rock,intense,0.35,False,diversity
+17,Chaos,experimental,mysterious,0.5,True,top_n
+18,Alex Clone,pop,happy,0.8,False,diversity
