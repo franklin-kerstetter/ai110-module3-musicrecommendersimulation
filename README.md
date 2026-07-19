@@ -12,9 +12,9 @@ KeyPlay recommends songs based on a user's favorite genre, current mood, and ene
 
 ### How Systems Usually Work
 
-Systems such as Spotify and Youtube use a variety of factors for recommending songs to users but both leverage vector embeddings.
-These embeddings combine both direct media features (tempo, energy, acousticness, etc.) with some aspect of personalization (skipped, repeated, watched for X minutes).
-Overall, they rely more heavily on implicit signals (time spent and interactions) to predict satisfaction better than direct ratings metrics.
+Spotify and YouTube use vector embeddings to power recommendations. Audio and metadata features (tempo, energy, acousticness, etc.) along with implicit signals (skips, repeats, listen time) map to vectors in high-dimensional space, clustering similar songs together.
+
+Recommendations work by finding nearest neighbors in this space where song embeddings form from audio/metadata features, and user embeddings form from implicit signals. The system then ranks candidate songs by cosine similarity between the song and user embeddings, surfacing songs most aligned with listening history first.
 
 Audio features include:
 * Tempo — BPM. Fast vs. slow.
