@@ -2,16 +2,9 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
+## KeyPlay 1.0
 
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
+KeyPlay recommends songs based on a user's favorite genre, current mood, and energy level. It uses a 60-song catalog spanning 41 genres and 21 moods, scored by three weighted features: genre match (35 pts), mood match (50 pts), and energy proximity (0-15 pts). Two ranking modes let users pick between pure top-N recommendations or a diversity-first algorithm that balances relevance with playlist variety. Built as a classroom exploration of how real-world systems like Spotify balance personalization, simplicity, and bias.
 
 ---
 
@@ -54,7 +47,7 @@ My song recommender leverages 3 core features:
 1. **Mood** — maps to user taste directly. User says "I want chill" = match mood=chill
 1. **Energy** — separates intensity within genre (pop happy 0.82 vs pop intense 0.93)
 
-We focused on these 3 because of their correlation to the valence, tempo, and accousticness metrics.
+We focused on these 3 because of their correlation to the valence, tempo, and acousticness metrics.
 
 Each **UserProfile** stores simple data about the user including favorite genre, mood, energy level, and acoustic preference.
 
@@ -64,7 +57,7 @@ There are separate scoring and ranking rules to separate concerns.
 The scoring rule is responsible for figuring out the best recommendations while the ranking rule is responsible for actually making the recommendation.
 This gives us maximum flexibility to adjust how we select songs and the scoring weights independently. 
 
-The recommender computes song scores with a simple greatest sum:
+The recommender computes song scores with a weighted sum:
 
 ```
 Score = (genre_match × 35) + (mood_match × 50) + (energy_distance × 15)
