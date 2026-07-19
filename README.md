@@ -46,28 +46,15 @@ Metadata features, on the other hand, include:
 
 ### How My System Works
 
-<!-- Explain your design in plain language.
-
-Some prompts to answer: -->
-
-<!-- - What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo -->
-<!-- - What information does your `UserProfile` store
-- How does your `Recommender` compute a score for each song
-- How do you choose which songs to recommend -->
-
-<!-- You can include a simple diagram or bullet list if helpful. -->
-
 #### Input Data
 
-My song recommender leverages 4 core features:
+My song recommender leverages 3 core features:
 
 1. **Genre** — broad buckets (pop vs lofi vs rock = different vibes)
 1. **Mood** — maps to user taste directly. User says "I want chill" = match mood=chill
 1. **Energy** — separates intensity within genre (pop happy 0.82 vs pop intense 0.93)
-1. **Danceability** — captures rhythm appeal independent of genre/mood
 
-We focused on these 4 because of their correlation to the valence, tempo, and accousticness metrics.
+We focused on these 3 because of their correlation to the valence, tempo, and accousticness metrics.
 
 Each **UserProfile** stores simple data about the user including favorite genre, mood, energy level, and acoustic preference.
 
@@ -80,7 +67,7 @@ This gives us maximum flexibility to adjust how we select songs and the scoring 
 The recommender computes song scores with a simple greatest sum:
 
 ```
-Score = (genre_match × 25) + (mood_match × 50) + (energy_distance × 25)
+Score = (genre_match × 35) + (mood_match × 50) + (energy_distance × 15)
 
 where:
   genre_match = 1 if song.genre == user.genre, else 0
@@ -95,14 +82,51 @@ The ranking algorithm follows as
 2. For each remaining song:
      relevance = score
      diversity = distance from all picked songs (genre/mood/energy)
-     combined = (0.7 × relevance) + (0.3 × diversity)
+     combined = (0.55 × relevance) + (0.45 × diversity)
 3. Pick highest combined, repeat until top N
 ```
 While this is slower than strictly taking the top N or some simpler algorithms, it prioritizes offering our users a broader exposure to songs. As long as the algorithm is not unreasonably slow, I believe users will appreciate better recommendations over faster but worse playlists.
 
 ---
 
-### Sample Recommendation Output
+## Getting Started
+
+### Setup
+
+1. Create a virtual environment (optional but recommended):
+
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate      # Mac or Linux
+   .venv\Scripts\activate         # Windows
+
+2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+3. Run the app:
+
+```bash
+python -m src.main
+```
+
+### Running Tests
+
+Run the starter tests with:
+
+```bash
+python -m pytest
+```
+
+You can add more tests in `tests/test_recommender.py`.
+
+---
+
+## Sample Recommendation Output
+
+### Output
 
 **Alex** (pop/happy, energy=0.8, diversity ranking):
 ```
@@ -328,7 +352,12 @@ Top Recommendations for River
 ============================================================
 ```
 
-## Adversarial Test Results
+#### Comments about Outputs
+For each recommendation, we're heavily weighting towards current mood and genre preference. This helps explain why each persona's top song is of their favorite genre. Additionally, these users are rather congruent with their genre, meaning that those who like pop are "happy," the person who likes rock is "intense," and the lofi fan is "chill." These match nicely, lending themselves to straightforward music recommendations.
+
+Tests breaking this genre-and-mood pairing are listed below, offering better overall tests of the recommendation system.
+
+### Adversarial Test Results
 
 These profiles test edge cases and potential scoring vulnerabilities:
 
@@ -737,79 +766,29 @@ Top Recommendations for Alex clone
 - **Deterministic output**: Alex vs Alex Clone return identical results (Storm Runner, etc.) in same order, confirming no randomness.
 - **Diversity algorithm working**: High/Low Energy Rockers (same genre/mood, different energy targets) do diverge slightly when using diversity ranking strategy.
 
-## Getting Started
-
-### Setup
-
-1. Create a virtual environment (optional but recommended):
-
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
-
-2. Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the app:
-
-```bash
-python -m src.main
-```
-
-### Running Tests
-
-Run the starter tests with:
-
-```bash
-pytest
-```
-
-You can add more tests in `tests/test_recommender.py`.
-
----
-
-## Sample Recommendation Output
-
-Paste a sample of your recommender's output here as a text block so a reader can see what it produces:
-
-```
-# e.g.:
-# User profile: genre=indie, mood=chill, energy=low
-# Recommendations:
-#   1. ...
-#   2. ...
-#   3. ...
-```
-
-**Screenshot or video** *(optional)*: <!-- Insert a screenshot or demo video link here -->
-
 ---
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
+The experiments I focused on were:
+* Introducing Adversarial user profiles (i.e. genre and mood conflicts)
+* Finding an appropriate song diversity weight
+* Adjusting mood, genre, and energy weights
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+Each of these required multiple iterations to fine-tune the playlist creation.
+
+One big takeaway was the implementation's binary nature. Genre matched or it didn't. Mood matched or it didn't. Due to time constraints, I didn't change the implementation, requiring drastic weight changes to impact the scoring.
 
 ---
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
+More limitations are documented in the [Limitations and Bias](./model_card.md#6-limitations-and-bias) section.
 
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
+Some limitations to note are
+* Song database does not include global genres
+* No fuzzy genre or mood matching
+* Strong favoring of mood
 
 ---
 
@@ -824,5 +803,19 @@ Write 1 to 2 paragraphs here about what you learned:
 - about how recommenders turn data into predictions
 - about where bias or unfairness could show up in systems like this
 
+I describe this some in my [Personal Reflection](./model_card.md#9-personal-reflection), but recommendation engines are an interesting blend of static and dynamic data wrapped in linear algebra.
+Static information can be properties like genre, BPM, or maker, while dynamic data is the number of plays or user ratings.
+The fun part of recommendation engines is determining the weighting of the data you have.
+Do you recommend products or songs because the maker matches something about the user's prior actions, or do you recommend others because the BPM or price is similar to what they are currently viewing?
+How a recommender answers these and similar questions is what differentiates them, and it's where bias or unfairness can be introduced.
+Popular brands can stay popular because they are already popular, even if a less well-known maker is offering a superior product.
+Undiscovered artists will never be found because they don't already have a high play count.
+Balancing "easy" or "safe" recommendations with meaningful ones is a tricky paradigm that take significant fine-tuning to perfect. Even then, the algorithm may need to be personalizable as user preferences differ and change over time.
+Once those questions are answered and the weights are determined, the recommendation problem becomes a mathematical optimization problem.
+The true problem comes in determining the scoring as that necessitates finding what is most important in a sea of useful data.
 
+The biggest learning moment during this project was trying to differentiate the playlist creation modes. `Diversity` and `Top N` stubbornly returned the same playlists, identifying the limitation of an all-or-nothing scoring system. It really showed how important how ranking spectrums are to these kinds of systems. Even with this limitation, the recommendation engine still feels like an informed recommendation. Any kind of personalization scoring gives better results than a random list.
 
+AI tools were responsible for the entire implementation with manual approval for each line change. I opt for consistent verification methodology to ensure the agent doesn't spiral off-track.
+
+If I extended this project, I'd first work on adding fuzzy genre and mood matching algorithms. Beyond this, I'd like to integrate the system with a more robust and real song database, necessitating more scoring performance optimizations as well.
