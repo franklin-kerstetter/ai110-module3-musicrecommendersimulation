@@ -4,7 +4,6 @@
 
 **KeyPlay 1.0**
 
----
 
 ## 2. Intended Use  
 
@@ -16,7 +15,6 @@ There's a lot of data not collected about the user that could be incorporated fo
 
 This is mostly a classroom exploration model, not intended for production use as is. It could certainly be productionalized with more robust logic leveraging more user data such as "last 5 songs listed to" or "last 5 songs skipped."
 
----
 
 ## 3. How the Model Works  
 
@@ -28,7 +26,6 @@ Song scoring is a simple sum of 3 weighted values: genre match, mood match, and 
 If we're in Top N mode, the songs are ordered and the top few songs are returned.
 
 If we're in Song Diversity mode, the songs are then re-scored with points given to how they differ from other, already-selected songs. This way, users can end with a diverse playlist.
----
 
 ## 4. Data  
 
@@ -40,13 +37,12 @@ The model leverages a dataset of 60 songs spanning 41 genres and 21 moods.
 
 **Known gaps:** Latin genres (reggaeton, bachata, salsa) completely absent. Asian music limited to K-pop. Middle Eastern, Indian/Bollywood, and deeper world music underrepresented. Gospel/spiritual music missing. Electronic subgenres thin beyond broad categories. No fuzzy genre boundaries—41 genres across 60 songs creates mismatch issues (noted in Limitations section).
 
----
+
 
 ## 5. Strengths  
 
 My system works well when there is congruence between a user's genre preference and current mood. For example, pop + happy, lofi + chill, and rock + intense. This results in high-confidence recommendations better matching expected outcomes.
 
----
 
 ## 6. Limitations and Bias 
 
@@ -58,7 +54,6 @@ There are several limitations of the current recommendation system. This is not 
 4. No popularity data - There's no indication of whether a song is widely played or not. We risk recommending unpopular songs.
 5. Too many genres in the songs list - There are 41 genres and 60 total songs. With no fuzzy genre match, we are limited in the success of the recommendations without an improved genre matching scoring.
 
----
 
 ## 7. Evaluation  
 
@@ -68,7 +63,6 @@ In terms of the recommendations, I evaluated the genre and energy relevance to d
 
 There is significant work left to improve the recommendation engine (e.g. genre approximation), but I was mostly testing around differentiating the different playlist modes. Choosing the top N is straightforward, but it took several iterations to determine a workable diversity weighting when constructing a less homogenous playlist. The system struggled to weight this appropriately, often leading to both modes producing the exact same playlists. This probably a fault on 2 fronts with one being the scoring being so all-or-nothing and the other being an incorrect diversity weighting. With time constraints, I opted for changing the diversity weighting, but a production-ready product would need a more robust scoring algorithm.
 
----
 
 ## 8. Future Work  
 
@@ -82,7 +76,6 @@ Some immediate feature and functionality ideas include
 * More modes (e.g. "Discovery" for finding all new genres)
 * More automation
 
----
 
 ## 9. Personal Reflection  
 

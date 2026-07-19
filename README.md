@@ -165,6 +165,8 @@ Top Recommendations for Alex
 
 ============================================================
 ```
+ - **Explanation:**
+ Alex is a happy, high-energy pop fan looking for a diversity songs. Because of this preference, we don't always recommend pop songs or purely happy songs, leading to the `Afrobeats` and `Gym Hero` recommendations mixed in.
 
 **Jordan** (lofi/chill, energy=0.4, top_n ranking):
 ```
@@ -210,7 +212,10 @@ Top Recommendations for Jordan
            energy 0.4 fits your preference
 
 ============================================================
-```
+``` 
+- **Explanation:**
+ Jordan is a chill lofi fan desiring purely the most-relevant songs. Because of this preference, we don't look for anything outside the best matching songs, recommending them in a descending scored order.
+ Notice that each song stays closely related to Jordan's mood and genre preference, resulting in a homogeneous playlist.
 
 **Casey** (rock/intense, energy=0.92, top_n ranking):
 ```
@@ -257,6 +262,8 @@ Top Recommendations for Casey
 
 ============================================================
 ```
+- **Explanation:**
+Casey is an intense rock fan using top-N ranking to get the best pure matches. The algorithm favors genre and mood hits, which is why the top two recommendations are rock songs. Lower-scoring picks like Gym Hero and Hardcore Bass appear because they match the intense mood and high energy (0.9), even though they're not rock—the mood weight (50 pts) overrides genre mismatches.
 
 **Morgan** (jazz/relaxed, energy=0.45, top_n ranking):
 ```
@@ -299,6 +306,8 @@ Top Recommendations for Morgan
 
 ============================================================
 ```
+- **Explanation:**
+Morgan is a relaxed jazz fan using top-N ranking, which explains the homogeneous output. Coffee Shop Stories dominates with a near-perfect score by matching all three criteria (jazz + relaxed + close energy). The steep score drop after song 2 reveals the catalog gap: few songs match both relaxed mood and target energy (0.45). Songs 3–5 get minimal points because they miss mood or genre, making pure energy proximity insufficient to score high.
 
 **River** (pop/happy, energy=0.28, diversity ranking):
 ```
@@ -344,6 +353,8 @@ Top Recommendations for River
 
 ============================================================
 ```
+- **Explanation:**
+River is a happy pop fan using diversity ranking despite low target energy (0.28). Sunrise City leads with high relevance, but diversity ranking pulls in Rooftop Lights, Afrobeats, and K-Pop Glory to expose different genres. All maintain happy mood, but the algorithm intentionally picks varied genres over pure energy matches, giving River a richer playlist than strict top-N would allow.
 
 #### Comments about Outputs
 For each recommendation, we're heavily weighting towards current mood and genre preference. This helps explain why each persona's top song is of their favorite genre. Additionally, these users are rather congruent with their genre, meaning that those who like pop are "happy," the person who likes rock is "intense," and the lofi fan is "chill." These match nicely, lending themselves to straightforward music recommendations.
